@@ -1,0 +1,72 @@
+---
+const navLinks = [
+  { name: '首页', path: '/' },
+  { name: '产品中心', path: '/products' },
+  { name: '行业解决方案', path: '/solutions' },
+  { name: '关于盛付通', path: '/about' },
+  { name: '资源中心', path: '/resources' },
+  { name: '联系我们', path: '/contact' },
+];
+const currentPath = Astro.url.pathname;
+---
+<nav class="bg-white shadow-md sticky top-0 z-50">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="flex justify-between h-20">
+      <div class="flex items-center">
+        <a href="/" class="flex-shrink-0 flex items-center gap-2 cursor-pointer">
+          <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#E60012" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-8 w-8 text-primary"><rect width="20" height="14" x="2" y="5" rx="2"/><line x1="2" x2="22" y1="10" y2="10"/></svg>
+          <span class="font-bold text-2xl text-gray-800 tracking-tight">盛付通<span class="text-primary">POS</span></span>
+        </a>
+      </div>
+      <div class="hidden md:flex items-center space-x-8">
+        {navLinks.map((link) => (
+          <a
+            href={link.path}
+            class={`px-3 py-2 text-sm font-medium transition-colors duration-200 ${
+              currentPath === link.path || (link.path !== '/' && currentPath.startsWith(link.path))
+                ? 'text-primary border-b-2 border-primary'
+                : 'text-gray-600 hover:text-primary'
+            }`}
+          >
+            {link.name}
+          </a>
+        ))}
+      </div>
+      <div class="flex items-center md:hidden">
+        <button id="mobile-menu-btn" class="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none">
+          <svg id="menu-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-6 w-6"><line x1="4" x2="20" y1="12" y2="12"/><line x1="4" x2="20" y1="6" y2="6"/><line x1="4" x2="20" y1="18" y2="18"/></svg>
+          <svg id="close-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-6 w-6 hidden"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
+        </button>
+      </div>
+    </div>
+  </div>
+  <div id="mobile-menu" class="hidden md:hidden bg-white border-t border-gray-100">
+    <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+      {navLinks.map((link) => (
+        <a
+          href={link.path}
+          class={`block px-3 py-4 rounded-md text-base font-medium ${
+            currentPath === link.path || (link.path !== '/' && currentPath.startsWith(link.path))
+              ? 'text-primary bg-red-50'
+              : 'text-gray-600 hover:text-primary hover:bg-gray-50'
+          }`}
+        >
+          {link.name}
+        </a>
+      ))}
+    </div>
+  </div>
+</nav>
+<script>
+  const btn = document.getElementById('mobile-menu-btn');
+  const menu = document.getElementById('mobile-menu');
+  const menuIcon = document.getElementById('menu-icon');
+  const closeIcon = document.getElementById('close-icon');
+  if (btn && menu && menuIcon && closeIcon) {
+    btn.addEventListener('click', () => {
+      menu.classList.toggle('hidden');
+      menuIcon.classList.toggle('hidden');
+      closeIcon.classList.toggle('hidden');
+    });
+  }
+</script>

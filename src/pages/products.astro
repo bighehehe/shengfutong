@@ -1,0 +1,141 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Navbar from '../components/Navbar.astro';
+import Footer from '../components/Footer.astro';
+
+const products = [
+  {
+    id: '1',
+    name: '盛付通MPOS',
+    category: 'mobile',
+    description: '小巧便携，支持刷卡、扫码等多种支付方式，适合个人小微商户使用。',
+    features: ['小巧便携', '支持多支付方式', '快速到账', '安全可靠'],
+    imageUrl: '/images/盛付通mpos.jpg'
+  },
+  {
+    id: '2',
+    name: '盛付通4G电签POS',
+    category: 'mobile',
+    description: '小巧便携，内置4G模块，随时随地收款，适合个人小微商户及移动摊位。',
+    features: ['电子签名', '4G全网通', '超长待机', '0.38%扫码费率'],
+    imageUrl: '/images/盛付通电签.jpg'
+  },
+  {
+    id: '3',
+    name: '盛付通大POS',
+    category: 'traditional',
+    description: '经典按键设计，出票速度快，性能稳定，适合超市、酒店等高频交易场景。',
+    features: ['热敏打印', '支持WIFI/4G', '大容量电池', '坚固耐用'],
+    imageUrl: '/images/盛付通大pos.jpg'
+  }
+];
+
+const tabs = [
+  { id: 'all', label: '全部产品' },
+  { id: 'smart', label: '智能POS' },
+  { id: 'mobile', label: '电签/MPOS' },
+  { id: 'traditional', label: '传统POS' }
+];
+---
+<Layout title="产品中心 - 盛付通POS">
+  <Navbar />
+  <main class="flex-grow bg-gray-50 min-h-screen py-12">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-12">
+        <h1 class="text-4xl font-extrabold text-gray-900 mb-4">产品中心</h1>
+        <p class="text-lg text-gray-600 max-w-2xl mx-auto">
+          满足不同场景的支付需求，为您提供安全、稳定、高效的收单工具
+        </p>
+      </div>
+
+      <!-- Filter Tabs -->
+      <div class="flex justify-center mb-12 space-x-4" id="filter-tabs">
+        {tabs.map((tab) => (
+          <button
+            data-filter={tab.id}
+            class={`filter-btn px-6 py-2 rounded-full text-sm font-medium transition-all ${
+              tab.id === 'all'
+                ? 'bg-primary text-white shadow-lg shadow-red-500/30'
+                : 'bg-white text-gray-600 hover:bg-gray-100 border border-gray-200'
+            }`}
+          >
+            {tab.label}
+          </button>
+        ))}
+      </div>
+
+      <!-- Product Grid -->
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8" id="product-grid">
+        {products.map((product) => (
+          <div
+            key={product.id}
+            data-category={product.category}
+            class="product-card bg-white rounded-2xl shadow-sm hover:shadow-xl transition-shadow duration-300 overflow-hidden flex flex-col"
+          >
+            <div class="h-64 overflow-hidden relative group">
+              <img
+                src={product.imageUrl}
+                alt={product.name}
+                class="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-500"
+              />
+              <div class="absolute inset-0 bg-black/40 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                <button class="bg-white text-gray-900 px-6 py-2 rounded-full font-bold text-sm">
+                  查看详情
+                </button>
+              </div>
+            </div>
+            <div class="p-6 flex-1 flex flex-col">
+              <div class="flex justify-between items-start mb-2">
+                <h3 class="text-xl font-bold text-gray-900">{product.name}</h3>
+                {product.category === 'smart' && <span class="bg-blue-100 text-blue-800 text-xs px-2 py-1 rounded">智能</span>}
+                {product.category === 'mobile' && <span class="bg-green-100 text-green-800 text-xs px-2 py-1 rounded">便携</span>}
+              </div>
+              <p class="text-gray-500 text-sm mb-6 line-clamp-2">
+                {product.description}
+              </p>
+              <div class="space-y-2 mb-6 flex-1">
+                {product.features.map((feature, idx) => (
+                  <div class="flex items-center text-sm text-gray-600">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#E60012" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-4 w-4 text-primary mr-2"><path d="M20 6 9 17l-5-5"/></svg>
+                    {feature}
+                  </div>
+                ))}
+              </div>
+              <button class="w-full mt-auto bg-gray-900 text-white py-3 rounded-lg font-medium hover:bg-primary transition-colors duration-300">
+                立即咨询
+              </button>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </main>
+  <Footer />
+</Layout>
+
+<script>
+  const buttons = document.querySelectorAll<HTMLButtonElement>('.filter-btn');
+  const cards = document.querySelectorAll<HTMLElement>('.product-card');
+
+  buttons.forEach((btn) => {
+    btn.addEventListener('click', () => {
+      const filter = btn.dataset.filter || 'all';
+
+      buttons.forEach((b) => {
+        b.classList.remove('bg-primary', 'text-white', 'shadow-lg', 'shadow-red-500/30');
+        b.classList.add('bg-white', 'text-gray-600', 'border', 'border-gray-200');
+      });
+      btn.classList.remove('bg-white', 'text-gray-600', 'border', 'border-gray-200');
+      btn.classList.add('bg-primary', 'text-white', 'shadow-lg', 'shadow-red-500/30');
+
+      cards.forEach((card) => {
+        const cat = card.dataset.category || '';
+        if (filter === 'all' || cat === filter) {
+          card.style.display = '';
+        } else {
+          card.style.display = 'none';
+        }
+      });
+    });
+  });
+</script>

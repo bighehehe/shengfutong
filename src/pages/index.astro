@@ -1,0 +1,149 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Navbar from '../components/Navbar.astro';
+import Footer from '../components/Footer.astro';
+---
+<Layout>
+  <Navbar />
+  <main class="flex-grow">
+    <!-- Hero Section -->
+    <section class="relative bg-gray-900 text-white overflow-hidden">
+      <div class="absolute inset-0">
+        <img
+          src="https://picsum.photos/1920/1080?grayscale&blur=2"
+          alt="Business Background"
+          class="w-full h-full object-cover opacity-20"
+        />
+        <div class="absolute inset-0 bg-gradient-to-r from-black/80 to-transparent"></div>
+      </div>
+      <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-32 md:py-48 flex items-center">
+        <div class="max-w-2xl">
+          <h1 class="text-4xl md:text-6xl font-extrabold tracking-tight mb-6">
+            智能支付，<span class="text-primary">链接未来</span>
+          </h1>
+          <p class="text-xl text-gray-300 mb-8 leading-relaxed">
+            盛付通为您提供全方位的支付解决方案。安全稳定、极速到账、费率优惠，助您的生意蒸蒸日上。
+          </p>
+          <div class="flex flex-col sm:flex-row gap-4">
+            <a href="/products" class="inline-flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-md text-white bg-primary hover:bg-red-700 md:text-lg transition-all shadow-lg hover:shadow-red-500/30">
+              查看产品
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="ml-2 h-5 w-5"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+            </a>
+            <a href="/contact" class="inline-flex items-center justify-center px-8 py-3 border border-white text-base font-medium rounded-md text-white hover:bg-white hover:text-gray-900 md:text-lg transition-all">
+              申请办理
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Features / Advantages -->
+    <section class="py-20 bg-white">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-16">
+          <h2 class="text-3xl font-extrabold text-gray-900 sm:text-4xl">
+            为什么选择盛付通？
+          </h2>
+          <p class="mt-4 max-w-2xl mx-auto text-xl text-gray-500">
+            央行颁发支付牌照，千万商户的共同选择
+          </p>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-12">
+          <div class="text-center p-8 rounded-2xl bg-gray-50 hover:bg-white hover:shadow-xl transition-all duration-300 border border-transparent hover:border-gray-100">
+            <div class="flex items-center justify-center h-16 w-16 rounded-full bg-red-100 text-primary mx-auto mb-6">
+              <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#E60012" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/><path d="m9 12 2 2 4-4"/></svg>
+            </div>
+            <h3 class="text-xl font-bold text-gray-900 mb-4">资金安全</h3>
+            <p class="text-gray-600">
+              拥有央行颁发的第三方支付牌照，资金全程监管，银联认证，每一笔交易都安全放心。
+            </p>
+          </div>
+          <div class="text-center p-8 rounded-2xl bg-gray-50 hover:bg-white hover:shadow-xl transition-all duration-300 border border-transparent hover:border-gray-100">
+            <div class="flex items-center justify-center h-16 w-16 rounded-full bg-red-100 text-primary mx-auto mb-6">
+              <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#E60012" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+            </div>
+            <h3 class="text-xl font-bold text-gray-900 mb-4">极速到账</h3>
+            <p class="text-gray-600">
+              支持D0秒到、T1结算等多种到账方式，全年365天无休，资金流转快人一步。
+            </p>
+          </div>
+          <div class="text-center p-8 rounded-2xl bg-gray-50 hover:bg-white hover:shadow-xl transition-all duration-300 border border-transparent hover:border-gray-100">
+            <div class="flex items-center justify-center h-16 w-16 rounded-full bg-red-100 text-primary mx-auto mb-6">
+              <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#E60012" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="14" height="20" x="5" y="2" rx="2" ry="2"/><path d="M12 18h.01"/></svg>
+            </div>
+            <h3 class="text-xl font-bold text-gray-900 mb-4">智能便捷</h3>
+            <p class="text-gray-600">
+              支持刷卡、扫码、NFC等全渠道支付方式，智能APP管理账单，生意尽在掌握。
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Product Highlight -->
+    <section class="py-20 bg-gray-50">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="lg:grid lg:grid-cols-2 lg:gap-16 items-center">
+          <div class="mb-12 lg:mb-0 relative">
+            <div class="absolute top-0 left-0 w-32 h-32 bg-red-200 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-blob"></div>
+            <div class="absolute top-0 right-0 w-32 h-32 bg-yellow-200 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-blob animation-delay-2000"></div>
+            <img
+              src="/images/盛付通电签.jpg"
+              alt="Smart POS Terminal"
+              class="relative rounded-2xl shadow-2xl w-full object-cover transform hover:scale-[1.02] transition-transform duration-500"
+            />
+          </div>
+          <div>
+            <h2 class="text-3xl font-extrabold text-gray-900 mb-6">
+              盛付通 4G 电签 POS 机
+            </h2>
+            <p class="text-lg text-gray-600 mb-8">
+              全新升级，告别蓝牙连接烦恼。内置4G流量卡，开机即用。支持微信、支付宝、云闪付等全渠道收款。
+            </p>
+            <ul class="space-y-4 mb-8">
+              <li class="flex items-center text-gray-700">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#22c55e" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-5 w-5 text-green-500 mr-3"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><path d="m9 11 3 3L22 4"/></svg>
+                无需连接手机，内置网络独立通讯
+              </li>
+              <li class="flex items-center text-gray-700">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#22c55e" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-5 w-5 text-green-500 mr-3"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><path d="m9 11 3 3L22 4"/></svg>
+                电子签名，小票永久保存
+              </li>
+              <li class="flex items-center text-gray-700">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#22c55e" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-5 w-5 text-green-500 mr-3"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><path d="m9 11 3 3L22 4"/></svg>
+                费率稳定，不跳码
+              </li>
+              <li class="flex items-center text-gray-700">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#22c55e" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-5 w-5 text-green-500 mr-3"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><path d="m9 11 3 3L22 4"/></svg>
+                超长待机，满足全天收款需求
+              </li>
+            </ul>
+            <a href="/products" class="text-primary font-bold hover:text-red-700 flex items-center group">
+              了解更多详情 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="ml-2 h-5 w-5 transform group-hover:translate-x-1 transition-transform"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="bg-primary">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 flex flex-col md:flex-row items-center justify-between">
+        <div class="mb-8 md:mb-0">
+          <h2 class="text-3xl font-extrabold text-white mb-2">
+            准备好升级您的支付体验了吗？
+          </h2>
+          <p class="text-red-100 text-lg">
+            立即申请，专业客服一对一指导，免费包邮到家。
+          </p>
+        </div>
+        <div class="flex gap-4">
+          <a href="/contact" class="bg-white text-primary px-8 py-3 rounded-md font-bold text-lg hover:bg-gray-100 transition shadow-lg">
+            免费领取
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+  <Footer />
+</Layout>

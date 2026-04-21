@@ -1,0 +1,123 @@
+---
+import { getCollection } from 'astro:content';
+import Layout from '../layouts/Layout.astro';
+import Navbar from '../components/Navbar.astro';
+import Footer from '../components/Footer.astro';
+
+const articles = await getCollection('resources');
+const sortedArticles = articles.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
+
+const tagMap: Record<string, string> = {
+  '文档': '指南',
+  '指南': '指南',
+  '费率': '问题',
+  '表格': '资讯',
+  'FAQ': '问题',
+  '帮助': '指南',
+  'APP': '资讯',
+  '下载': '指南',
+  '视频': '指南',
+  '教程': '指南',
+  '公告': '资讯',
+  '政策': '资讯',
+};
+
+const tagColor: Record<string, string> = {
+  '指南': 'bg-blue-500',
+  '问题': 'bg-green-500',
+  '资讯': 'bg-yellow-500',
+};
+
+const iconMap: Record<string, string> = {
+  'book-open': 'M12 7v14M3 18a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h5a4 4 0 0 1 4 4 4 4 0 0 1 4-4h5a1 1 0 0 1 1 1v13a1 1 0 0 1-1 1h-6a3 3 0 0 0-3 3 3 3 0 0 0-3-3z',
+  'file-text': 'M6 22a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h8a2.4 2.4 0 0 1 1.704.706l3.588 3.588A2.4 2.4 0 0 1 20 8v12a2 2 0 0 1-2 2zM14 2v5a1 1 0 0 0 1 1h5M10 9H8M16 13H8M16 17H8',
+  'help-circle': 'M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10zM9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3M12 17h.01',
+  'smartphone': 'M12 18h.01M8 21h8a2 2 0 0 0 2-2V5a2 2 0 0 0-2-2H8a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2z',
+  'video': 'm16 13 5.223 3.482a.5.5 0 0 0 .777-.416V7.87a.5.5 0 0 0-.752-.432L16 10.5M2 6v12a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V6M6 2h12',
+  'bell': 'M10.268 21a2 2 0 0 0 3.464 0M3.262 15.326A1 1 0 0 0 4 17h16a1 1 0 0 0 .74-1.673C19.41 13.956 18 12.499 18 8A6 6 0 0 0 6 8c0 4.499-1.411 5.956-2.738 7.326',
+};
+
+const itemsPerPage = 6;
+const currentPage = 1;
+const totalPages = Math.ceil(sortedArticles.length / itemsPerPage);
+const startIndex = (currentPage - 1) * itemsPerPage;
+const endIndex = startIndex + itemsPerPage;
+const currentArticles = sortedArticles.slice(startIndex, endIndex);
+---
+<Layout title="资源中心 - 盛付通POS">
+  <Navbar />
+  <main class="flex-grow bg-gray-50 min-h-screen">
+    <div class="bg-gradient-to-r from-gray-900 to-gray-800 py-20 px-4 sm:px-6 lg:px-8 text-center text-white">
+      <h1 class="text-4xl font-extrabold mb-4">资源中心</h1>
+      <p class="text-xl text-gray-300 max-w-3xl mx-auto">
+        汇聚产品资料、操作指南与最新资讯，助您轻松使用盛付通服务
+      </p>
+    </div>
+
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        {currentArticles.map((article) => {
+          const firstTag = article.data.tags[0];
+          const tagType = tagMap[firstTag] || '资讯';
+          const tagBg = tagColor[tagType] || 'bg-yellow-500';
+          return (
+            <a
+              href={`/resources/${article.slug}`}
+              class="group block bg-white rounded-xl shadow-sm hover:shadow-lg transition-all duration-300"
+            >
+              <div class="p-6">
+                <div class="flex justify-between items-start mb-4">
+                  <div class="flex items-center text-xs text-gray-500">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-2">
+                      <rect width="18" height="18" x="3" y="4" rx="2" ry="2"/><path d="M16 2v4"/><path d="M8 2v4"/><path d="M3 10h18"/>
+                    </svg>
+                    {article.data.pubDate.toISOString().split('T')[0].replace(/-/g, '-')}
+                  </div>
+                  <span class={`text-xs text-white px-2 py-1 rounded-full ${tagBg}`}>
+                    {tagType}
+                  </span>
+                </div>
+                <h3 class="text-lg font-bold text-gray-900 mb-2 group-hover:text-primary transition-colors">{article.data.title}</h3>
+                <p class="text-gray-600 text-sm mb-4 line-clamp-3">{article.data.description}</p>
+                <div class="flex items-center text-sm text-primary font-medium group-hover:translate-x-1 transition-transform">
+                  阅读全文
+                  <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="ml-1">
+                    <path d="M5 12h14"/><path d="m12 5 7 7-7 7"/>
+                  </svg>
+                </div>
+              </div>
+            </a>
+          );
+        })}
+      </div>
+
+      {/* Pagination */}
+      {totalPages > 1 && (
+        <div class="flex justify-center mt-12">
+          <div class="flex items-center space-x-2">
+            <button disabled={currentPage === 1} class="px-3 py-2 rounded-md border border-gray-300 bg-white text-gray-700 hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed">
+              <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="m15 18-6-6 6-6"/>
+              </svg>
+            </button>
+            {Array.from({ length: totalPages }, (_, i) => i + 1).map((page) => (
+              <button
+                key={page}
+                onClick={() => window.location.href = `?page=${page}`}
+                class={`px-3 py-2 rounded-md text-sm font-medium ${currentPage === page ? 'bg-primary text-white' : 'bg-white text-gray-700 border border-gray-300 hover:bg-gray-50'}`}
+              >
+                {page}
+              </button>
+            ))}
+            <button disabled={currentPage === totalPages} class="px-3 py-2 rounded-md border border-gray-300 bg-white text-gray-700 hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed">
+              <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="m9 18 6-6-6-6"/>
+              </svg>
+            </button>
+          </div>
+        </div>
+      )}
+    </div>
+  </main>
+  <Footer />
+</Layout>

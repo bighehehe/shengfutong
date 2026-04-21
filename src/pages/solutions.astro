@@ -1,0 +1,110 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Navbar from '../components/Navbar.astro';
+import Footer from '../components/Footer.astro';
+
+const industries = [
+  {
+    id: 1,
+    title: '零售行业解决方案',
+    desc: '针对商超、便利店、百货等零售场景，提供商品管理、库存盘点、会员营销一体化服务。',
+    icon: 'shopping-bag',
+    image: '/images/智慧零售.png',
+    color: 'bg-blue-600',
+    textColor: 'text-blue-600'
+  },
+  {
+    id: 2,
+    title: '餐饮行业解决方案',
+    desc: '不仅是收款，更懂经营。支持扫码点餐、后厨打印、外卖接单，提升翻台率。',
+    icon: 'coffee',
+    image: '/images/餐饮美食.png',
+    color: 'bg-orange-500',
+    textColor: 'text-orange-500'
+  },
+  {
+    id: 3,
+    title: '酒店旅游解决方案',
+    desc: '预授权功能完善，支持多部门协同，财务对账更轻松，提升旅客入住体验。',
+    icon: 'hotel',
+    image: '/images/酒店旅游.png',
+    color: 'bg-indigo-600',
+    textColor: 'text-indigo-600'
+  },
+  {
+    id: 4,
+    title: '物流快递解决方案',
+    desc: '移动便携，货到付款神器。支持实时定位，电子签名，保障资金与货物安全。',
+    icon: 'truck',
+    image: '/images/物流快递.png',
+    color: 'bg-green-600',
+    textColor: 'text-green-600'
+  }
+];
+---
+<Layout title="行业解决方案 - 盛付通POS">
+  <Navbar />
+  <main class="flex-grow bg-white min-h-screen">
+    <div class="bg-gray-900 py-20 px-4 sm:px-6 lg:px-8 text-center text-white">
+      <h1 class="text-4xl font-extrabold mb-4">行业解决方案</h1>
+      <p class="text-xl text-gray-300 max-w-3xl mx-auto">
+        深入行业场景，定制专属支付方案，助力企业数字化转型
+      </p>
+    </div>
+
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
+      <div class="space-y-20">
+        {industries.map((item, index) => (
+          <div class={`flex flex-col md:flex-row gap-12 items-center ${index % 2 === 1 ? 'md:flex-row-reverse' : ''}`}>
+            <div class="w-full md:w-1/2 relative group">
+              <div class={`absolute inset-0 ${item.color} rounded-2xl transform rotate-3 group-hover:rotate-0 transition-transform duration-300 opacity-20`}></div>
+              <img 
+                src={item.image} 
+                alt={item.title} 
+                class="relative rounded-2xl shadow-lg w-full object-cover h-80 z-10"
+              />
+            </div>
+            <div class="w-full md:w-1/2">
+              <div class={`inline-flex p-4 rounded-2xl ${item.color} shadow-lg mb-6`}>
+                {item.icon === 'shopping-bag' && (
+                  <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z"/><path d="M3 6h18"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+                )}
+                {item.icon === 'coffee' && (
+                  <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 2v2"/><path d="M14 2v2"/><path d="M16 8a1 1 0 0 1 1 1v8a4 4 0 0 1-4 4H7a4 4 0 0 1-4-4V9a1 1 0 0 1 1-1h14a4 4 0 1 1 0 8h-1"/><path d="M6 2v2"/></svg>
+                )}
+                {item.icon === 'hotel' && (
+                  <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2Z"/><path d="m9 16 .348-.24c1.465-1.013 3.84-1.013 5.304 0L15 16"/><path d="M8 7h.01"/><path d="M16 7h.01"/><path d="M12 7h.01"/><path d="M12 11h.01"/><path d="M16 11h.01"/><path d="M8 11h.01"/><path d="M10 22v-6.5m4 0V22"/></svg>
+                )}
+                {item.icon === 'truck' && (
+                  <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 18V6a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2v11a1 1 0 0 0 1 1h2"/><path d="M15 18H9"/><path d="M19 18h2a1 1 0 0 0 1-1v-3.65a1 1 0 0 0-.22-.624l-3.48-4.35A1 1 0 0 0 17.52 8H14"/><circle cx="17" cy="18" r="2"/><circle cx="7" cy="18" r="2"/></svg>
+                )}
+              </div>
+              <h2 class="text-3xl font-bold text-gray-900 mb-4">{item.title}</h2>
+              <p class="text-lg text-gray-600 mb-6 leading-relaxed">
+                {item.desc}
+              </p>
+              <ul class="space-y-3 mb-8">
+                <li class="flex items-center text-gray-700">
+                  <span class={`w-2 h-2 rounded-full mr-3 ${item.color}`}></span>
+                  多渠道融合支付
+                </li>
+                <li class="flex items-center text-gray-700">
+                  <span class={`w-2 h-2 rounded-full mr-3 ${item.color}`}></span>
+                  会员精准营销
+                </li>
+                <li class="flex items-center text-gray-700">
+                  <span class={`w-2 h-2 rounded-full mr-3 ${item.color}`}></span>
+                  数据报表分析
+                </li>
+              </ul>
+              <button class={`flex items-center font-bold transition-colors ${item.textColor}`}>
+                查看详情 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="ml-2 h-5 w-5"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+              </button>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </main>
+  <Footer />
+</Layout>
